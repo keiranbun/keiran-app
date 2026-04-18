@@ -1,5 +1,18 @@
 .env
 .vercel
 
-node_modules
-public
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+dist/
+
+# Editor folders and files
+.vscode/*
+!.vscode/extensions.json
+
+# Vite specific
+.vite/
