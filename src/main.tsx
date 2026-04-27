@@ -1,9 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Homepage from "./pages/Homepage";
+import { RouterProvider } from "react-router";
+import { router } from "./router";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Homepage />
+    <RouterProvider router={router} />
   </StrictMode>,
 );
