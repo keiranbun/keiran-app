@@ -1,0 +1,15 @@
+@import "./global.css";
+
+.header {
+  margin-bottom: 0;
+}
+
+.sub-header {
+  padding: 0;
+  margin: 0;
+  font-size: large;
+}
+
+.link {
+  color: white;
+}
