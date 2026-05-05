@@ -23,6 +23,11 @@ body {
   justify-content: center;
 }
 
+.flex-right {
+  display: flex;
+  justify-content: right;
+}
+
 .flex-column {
   flex-direction: column;
 }
