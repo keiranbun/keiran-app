@@ -13,6 +13,7 @@ dist/
 # Editor folders and files
 .vscode/*
 !.vscode/extensions.json
+docs/*
 
 # Vite specific
 .vite/
