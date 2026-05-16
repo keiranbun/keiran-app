@@ -1,11 +1,18 @@
+import React, { useState } from "react";
 import "../styles/login.css";
+import { loginPostRequest } from "../api/loginClient";
+import { sha256 } from "../util/sha256";
 
 const Login = () => {
-  const handleLogin = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("WIP Login");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    // TODO: Add login system
+  const handleLogin = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const usernameEncrypt = await sha256(username);
+    const passwordEncrypt = await sha256(password);
+
+    loginPostRequest(usernameEncrypt, passwordEncrypt);
   };
 
   return (
@@ -18,6 +25,8 @@ const Login = () => {
               type="text"
               id="username"
               name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="login-input"
               required
             />
@@ -28,6 +37,8 @@ const Login = () => {
               type="password"
               id="password"
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="login-input"
               required
             />
