@@ -9,5 +9,5 @@ export async function loginPostRequest(username: string, password: string) {
     body: JSON.stringify({ username, password }),
   });
 
-  console.log(response);
+  return response.status;
 }
