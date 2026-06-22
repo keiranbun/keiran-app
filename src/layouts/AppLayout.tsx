@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import HeaderBar from "../components/headerBar/headerBar";
+import HeaderBar from "../components/HeaderBar/HeaderBar";
 
 const AppLayout = () => {
   return (
