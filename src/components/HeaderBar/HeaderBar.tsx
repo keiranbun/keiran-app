@@ -1,10 +1,12 @@
-import { navigateTo } from "@/util/navigate";
+import { useNavigate } from "react-router";
 import { Separator } from "../ui/separator";
 import HeaderLinks from "./HeaderLinks";
 
 const HeaderBar = () => {
+  const navigate = useNavigate();
+
   const handleLogoClick = () => {
-    navigateTo("/");
+    navigate("/");
   };
 
   return (
@@ -12,7 +14,7 @@ const HeaderBar = () => {
       <div className="flex justify-center">
         <h3 className="text-3xl pb-1 pt-1">
           <span
-            className="text-primary hover:cursor-pointer hover:underline"
+            className="text-primary hover:underline"
             onClick={handleLogoClick}
           >
             keiran
