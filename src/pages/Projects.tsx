@@ -7,9 +7,15 @@ const Projects = () => {
         <ProjectCard
           title="Georgia Tattoos"
           description="A website for the Brisbane based tattoo artist Georgia Macdonald"
-          gitLink="https://github.com/keiranbun/film-dex"
-          websiteLink="https://film-dex-rho.vercel.app/"
-          techStack={["React", "TypeScript", "Tailwind", "Vercel"]}
+          gitLink="https://github.com/keiranbun/georgia-tattoos"
+          websiteLink="https://www.georgiatattoos.com.au/"
+          techStack={[
+            "React",
+            "TypeScript",
+            "Tailwind",
+            "Vercel",
+            "Playwright",
+          ]}
         />
         <ProjectCard
           title="keiran.app"
