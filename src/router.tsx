@@ -4,9 +4,9 @@ import Error from "./pages/Error";
 import AppLayout from "./layouts/AppLayout";
 import Projects from "./pages/Projects";
 import Apps from "./pages/Apps";
-import MovieList from "./pages/MovieList";
-import { movieLoader } from "./lib/movie";
 import Loading from "./components/Loading/Loading";
+import { moviePageLoader } from "./lib/movie";
+import Movies from "./pages/Movies/Movies";
 
 export const router = createBrowserRouter([
   {
@@ -20,8 +20,8 @@ export const router = createBrowserRouter([
       // Apps
       {
         path: "movies",
-        Component: MovieList,
-        loader: movieLoader,
+        Component: Movies,
+        loader: moviePageLoader,
         HydrateFallback: Loading,
       },
     ],

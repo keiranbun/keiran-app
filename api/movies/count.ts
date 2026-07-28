@@ -9,19 +9,16 @@ const client = createClient({
 });
 
 /**
- * GET: Fetches a list of movies from the database
+ * GET: The count of the number of movies in the DB
  */
-export const GET = async (request: Request) => {
-  const { searchParams } = new URL(request.url);
-  const limit = Number(searchParams.get("limit") ?? 25);
-  const offset = Number(searchParams.get("offset") ?? 0);
-
+export const GET = async () => {
   const result = await client.execute({
-    sql: "SELECT * FROM movies ORDER BY movie_title LIMIT ? OFFSET ?",
-    args: [limit, offset],
+    sql: "SELECT COUNT (*) FROM movies",
   });
 
-  return new Response(JSON.stringify({ body: result }), {
+  const count = result.rows[0][0];
+
+  return new Response(JSON.stringify({ body: count }), {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
