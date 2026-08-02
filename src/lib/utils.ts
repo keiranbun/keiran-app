@@ -8,3 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export const toSearchFormat = (value: string) => {
   return value.toLowerCase().replace(/[:./,']/g, "");
 };
+
+export const getPathname = () => {
+  return window.location.pathname;
+};
