@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Validates Conventional Commits subject + per-file body format.
+
+commit_msg_file="$1"
+subject=$(head -n 1 "$commit_msg_file")
+body=$(tail -n +2 "$commit_msg_file")
+
+subject_regex='^(feat|fix|refactor|style|test|docs|build|chore|ci|perf|revert)(\([a-z0-9-]+\))?!?: .+$'
+file_line_regex='^`[^`]+` - .+$'
+
+if ! echo "$subject" | grep -Eq "$subject_regex"; then
+  echo "ERROR: Invalid commit subject format." >&2
+  echo "Expected: type(scope): description" >&2
+  echo "Got: $subject" >&2
+  exit 1
+fi
+
+if ! echo "$body" | grep -Eq "$file_line_regex"; then
+  echo "ERROR: Commit body must include at least one per-file line." >&2
+  echo 'Expected: `filename` - short explanation' >&2
+  exit 1
+fi
+
+exit 0
