@@ -12,8 +12,8 @@ Follow [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0
 ```
 <type>(<scope>): <description>
 
-<filename> - <what changed in this file>
-<filename> - <what changed in this file>
+- <filename>: <what changed in this file>
+- <filename>: <what changed in this file>
 ```
 
 ## Subject
@@ -28,17 +28,31 @@ Follow [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0
 ## Body (project convention)
 
 - Blank line after subject
-- One line per materially changed file
-- Format: `filename - short explanation`
+- One bullet per materially changed file
+- Format: `- filename: short explanation`
+- Use **filename only** — never include directory paths unless disambiguating duplicate names
+- Wrong: `- .githooks/commit-msg: ...` or `- .cursor/rules/git-commits.mdc: ...`
+- Correct: `- commit-msg: ...` or `- git-commits.mdc: ...`
+- Use **full path** only when multiple changed files share the same name
 - Order by importance; skip lockfiles unless they are the main change
 
 ## Example
 
 ```
-feat(header): update header links with current page
+chore(rules): refine commit message formatting guidelines
 
-HeaderLinks.tsx - highlight active route and sync nav links with current page
-utils.ts - add helper to resolve current page from pathname
+- .cursorrules: update formatting rules to clarify bullet point structure
+- git-commits.mdc: adjust examples to reflect new bullet point format
+- commit-msg: modify regex to enforce new bullet point format
+```
+
+## Example with duplicate filenames
+
+```
+feat(pages): update shared layout components
+
+- src/pages/Movies/Movies.tsx: add pagination state
+- src/pages/Apps/Apps.tsx: add app grid layout
 ```
 
 Never commit `.env`, credentials, or secrets.

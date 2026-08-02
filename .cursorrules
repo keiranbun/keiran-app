@@ -5,8 +5,8 @@ Required format:
 
 <type>(<scope>): <description>
 
-<filename> - <what changed in this file>
-<filename> - <what changed in this file>
+- <filename>: <what changed in this file>
+- <filename>: <what changed in this file>
 
 Subject rules (per spec):
 - type: feat (new feature), fix (bug fix), or build, chore, ci, docs, style, refactor, perf, test, revert
@@ -16,16 +16,26 @@ Subject rules (per spec):
 
 Body rules (project convention on top of spec):
 - Blank line after subject (required by spec)
-- One line per materially changed staged file
-- Format: filename - short explanation
-- Filename only unless path needed to disambiguate
+- One bullet per materially changed staged file
+- Format: - filename: short explanation
+- Use filename ONLY — never include directory paths unless disambiguating duplicate names
+- WRONG: - .githooks/commit-msg: ... or - .cursor/rules/git-commits.mdc: ...
+- CORRECT: - commit-msg: ... or - git-commits.mdc: ...
+- Use full path only when multiple changed files share the same name
 - Order by importance; skip lockfiles and generated artifacts unless main change
 - Do not repeat the subject in the body
 
 Example:
-feat(header): update header links with current page
+chore(rules): refine commit message formatting guidelines
 
-HeaderLinks.tsx - highlight active route and sync nav links with current page
-utils.ts - add helper to resolve current page from pathname
+- .cursorrules: update formatting rules to clarify bullet point structure
+- git-commits.mdc: adjust examples to reflect new bullet point format
+- commit-msg: modify regex to enforce new bullet point format
+
+Example with duplicate filenames:
+feat(pages): update shared layout components
+
+- src/pages/Movies/Movies.tsx: add pagination state
+- src/pages/Apps/Apps.tsx: add app grid layout
 
 Never commit .env, credentials, or secrets.
