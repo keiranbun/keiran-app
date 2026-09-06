@@ -11,7 +11,7 @@ const client = createClient({
 /**
  * GET: Fetches a list of movies from the database
  */
-export const GET = async (request: Request) => {
+export const GET = async (request: Request): Promise<Response> => {
   const { searchParams } = new URL(request.url);
   const limit = Number(searchParams.get("limit") ?? 25);
   const offset = Number(searchParams.get("offset") ?? 0);

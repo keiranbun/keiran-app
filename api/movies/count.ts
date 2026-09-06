@@ -11,7 +11,7 @@ const client = createClient({
 /**
  * GET: The count of the number of movies in the DB
  */
-export const GET = async () => {
+export const GET = async (): Promise<Response> => {
   const result = await client.execute({
     sql: "SELECT COUNT (*) FROM movies",
   });
