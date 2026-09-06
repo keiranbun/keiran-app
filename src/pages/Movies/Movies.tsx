@@ -3,7 +3,8 @@ import { useLoaderData, useNavigation } from "react-router";
 import MoviePagination from "./MoviePagination";
 import { Spinner } from "@/components/ui/spinner";
 import MovieTable from "./MovieTable";
-import { fetchMovieList } from "@/lib/movie";
+import { fetchMovieList, fetchMovieListSearch } from "@/lib/movie";
+import MovieSearch from "./MovieSearch";
 
 export type MovieType = {
   movie_id: number;
@@ -26,6 +27,8 @@ const Movies = () => {
   };
 
   const [displayedMovies, setDisplayedMovies] = useState<MovieType[]>(movies);
+  const [totalMovieCount, setTotalMovieCount] = useState(movieCount);
+  const [searchValue, setSearchValue] = useState("");
   const [isMovieFetchLoading, setIsMovieFetchLoading] = useState(false);
 
   const navigation = useNavigation();
@@ -49,24 +52,44 @@ const Movies = () => {
     return buttonState;
   };
 
+  const handleHidePagination = () => {
+    const searchValueLength = searchValue.length > 0;
+
+    return searchValueLength
+      ? totalMovieCount < moviePerPage
+      : movieCount < moviePerPage;
+  };
+
   useEffect(() => {
     const run = async () => {
       setIsMovieFetchLoading(true);
-      const fetchedMovies = await fetchMovieList(moviePerPage, pageNumber);
+
+      if (searchValue.length > 0) {
+        const fetchedMovies = await fetchMovieListSearch(
+          searchValue,
+          moviePerPage,
+          pageNumber,
+        );
+        setDisplayedMovies(fetchedMovies.movies);
+        setTotalMovieCount(fetchedMovies.count);
+      } else {
+        const fetchedMovies = await fetchMovieList(moviePerPage, pageNumber);
+        setDisplayedMovies(fetchedMovies.movies);
+        setTotalMovieCount(movieCount);
+      }
       setIsMovieFetchLoading(false);
-      setDisplayedMovies(fetchedMovies);
     };
     void run();
-  }, [pageNumber, moviePerPage]);
+  }, [pageNumber, moviePerPage, searchValue, movieCount]);
 
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-4xl underline underline-offset-5">Movie List</h1>
-      <MoviePagination
-        setMoviePerPage={setMoviePerPage}
-        setPageNumber={setPageNumber}
-        prevButtonDisabled={handleButtonDisabledState(buttonType.prev)}
-        nextButtonDisabled={handleButtonDisabledState(buttonType.next)}
+
+      <MovieSearch
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        movieResults={totalMovieCount}
       />
 
       {isMovieListLoading ? (
@@ -74,6 +97,14 @@ const Movies = () => {
       ) : (
         <MovieTable movies={displayedMovies} />
       )}
+
+      <MoviePagination
+        hidePagination={handleHidePagination()}
+        setMoviePerPage={setMoviePerPage}
+        setPageNumber={setPageNumber}
+        prevButtonDisabled={handleButtonDisabledState(buttonType.prev)}
+        nextButtonDisabled={handleButtonDisabledState(buttonType.next)}
+      />
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import type { MovieType } from "@/pages/Movies/Movies";
-import { toSearchFormat } from "./utils";
 
 export const DEFAULT_MOVIE_LIMIT = 25;
 export const DEFAULT_MOVIE_OFFSET = 0;
@@ -13,6 +12,11 @@ const FETCH_COUNT_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:3000/api/movies/count"
     : "api/movies/count";
+
+const FETCH_SEARCH_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000/api/movies/search"
+    : "api/movies/search";
 
 export async function moviePageLoader() {
   const [movies, movieCount] = await Promise.all([
@@ -29,7 +33,7 @@ export async function moviePageLoader() {
 export async function fetchMovieList(
   limit: number,
   page: number,
-): Promise<MovieType[]> {
+): Promise<{ movies: MovieType[] }> {
   const params = new URLSearchParams({
     limit: String(limit),
     offset: String(page * limit),
@@ -43,12 +47,8 @@ export async function fetchMovieList(
       data.body.columns.map((col: string, idx: number) => [col, row[idx]]),
     ),
   );
-  movies.map((movie: MovieType) => ({
-    ...movie,
-    search_title: toSearchFormat(movie.movie_title),
-  }));
 
-  return movies;
+  return { movies };
 }
 
 /**
@@ -59,4 +59,31 @@ async function fetchMovieCount(): Promise<number> {
   const data = await response.json();
 
   return data.body;
+}
+
+export async function fetchMovieListSearch(
+  search: string,
+  limit: number,
+  page: number,
+): Promise<{ movies: MovieType[]; count: number }> {
+  const params = new URLSearchParams({
+    movie: search,
+    limit: String(limit),
+    offset: String(page * limit),
+  });
+
+  const response = await fetch(`${FETCH_SEARCH_URL}?${params}`, {
+    method: "GET",
+  });
+
+  console.log(response);
+
+  const data = await response.json();
+  const movies = data.body.rows.map((row: string[]) =>
+    Object.fromEntries(
+      data.body.columns.map((col: string, idx: number) => [col, row[idx]]),
+    ),
+  );
+
+  return { movies, count: Number(data.body.count) };
 }

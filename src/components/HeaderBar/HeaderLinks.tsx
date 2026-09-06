@@ -15,7 +15,6 @@ type HeaderLinkType = {
 
 const HeaderLinks = () => {
   const currentPathname = getPathname();
-  console.log(currentPathname);
 
   return (
     <div className="flex items-center space-x-4">

@@ -21,6 +21,7 @@ type MoviePaginationType = {
   setPageNumber: Dispatch<SetStateAction<number>>;
   prevButtonDisabled: boolean;
   nextButtonDisabled: boolean;
+  hidePagination: boolean;
 };
 
 enum buttonType {
@@ -33,6 +34,7 @@ const MoviePagination = ({
   setPageNumber,
   prevButtonDisabled,
   nextButtonDisabled,
+  hidePagination = false,
 }: MoviePaginationType) => {
   const handleValueChange = (value: string) => {
     setMoviePerPage(Number(value));
@@ -46,6 +48,8 @@ const MoviePagination = ({
       setPageNumber((prev) => prev - 1);
     }
   };
+
+  if (hidePagination) return <></>;
 
   return (
     <div className="flex items-center justify-between gap-5 my-5">
