@@ -61,7 +61,9 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    const run = async () => {
+    let cancelled = false;
+
+    const fetchAPI = async () => {
       setIsMovieFetchLoading(true);
 
       if (searchValue.length > 0) {
@@ -70,6 +72,7 @@ const Movies = () => {
           moviePerPage,
           pageNumber,
         );
+
         setDisplayedMovies(fetchedMovies.movies);
         setTotalMovieCount(fetchedMovies.count);
       } else {
@@ -79,9 +82,17 @@ const Movies = () => {
       }
       setIsMovieFetchLoading(false);
     };
-    void run();
-  }, [pageNumber, moviePerPage, searchValue, movieCount]);
 
+    if (searchValue.length > 0) {
+      const timer = setTimeout(fetchAPI, 750);
+      return () => {
+        cancelled = true;
+        clearTimeout(timer);
+      };
+    }
+
+    void fetchAPI();
+  }, [pageNumber, moviePerPage, searchValue, movieCount]);
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-4xl underline underline-offset-5">Movie List</h1>
