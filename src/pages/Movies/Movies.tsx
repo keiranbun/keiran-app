@@ -61,8 +61,6 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    let cancelled = false;
-
     const fetchAPI = async () => {
       setIsMovieFetchLoading(true);
 
@@ -86,7 +84,6 @@ const Movies = () => {
     if (searchValue.length > 0) {
       const timer = setTimeout(fetchAPI, 750);
       return () => {
-        cancelled = true;
         clearTimeout(timer);
       };
     }
