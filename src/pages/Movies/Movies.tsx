@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLoaderData, useNavigation } from "react-router";
 import MoviePagination from "./MoviePagination";
 import { Spinner } from "@/components/ui/spinner";
@@ -21,6 +21,8 @@ enum buttonType {
 }
 
 const Movies = () => {
+  const isFirstRender = useRef(true);
+
   const { movies, movieCount } = useLoaderData() as {
     movies: MovieType[];
     movieCount: number;
@@ -61,6 +63,11 @@ const Movies = () => {
   };
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     const fetchAPI = async () => {
       setIsMovieFetchLoading(true);
 
