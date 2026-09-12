@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { createClient } from "@libsql/client";
 
 const ALLOWED_ORIGIN =
