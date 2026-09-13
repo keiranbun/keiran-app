@@ -21,8 +21,6 @@ enum buttonType {
 }
 
 const Movies = () => {
-  const isFirstRender = useRef(true);
-
   const { movies, movieCount } = useLoaderData() as {
     movies: MovieType[];
     movieCount: number;
@@ -63,11 +61,6 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
     const fetchAPI = async () => {
       setIsMovieFetchLoading(true);
 
