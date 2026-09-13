@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData, useNavigation } from "react-router";
 import MoviePagination from "./MoviePagination";
 import { Spinner } from "@/components/ui/spinner";
