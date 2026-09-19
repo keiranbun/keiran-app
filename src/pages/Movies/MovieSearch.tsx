@@ -25,7 +25,7 @@ const MovieSearch = ({
   };
 
   return (
-    <InputGroup className="max-w-sm my-5">
+    <InputGroup className="max-w-xs my-5">
       <InputGroupInput
         placeholder="Search..."
         value={searchValue}
