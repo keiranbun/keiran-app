@@ -46,7 +46,7 @@ const Movies = () => {
     }
 
     if (button === buttonType.next) {
-      buttonState = pageNumber * moviePerPage >= movieCount ? true : false;
+      buttonState = (pageNumber + 1) * moviePerPage >= movieCount;
     }
 
     return buttonState;
