@@ -10,12 +10,14 @@ type MovieSearchType = {
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
   movieResults: number;
+  disabled?: boolean;
 };
 
 const MovieSearch = ({
   setSearchValue,
   searchValue,
   movieResults,
+  disabled,
 }: MovieSearchType) => {
   const handleSearchInput = (
     input: ChangeEvent<HTMLInputElement, HTMLInputElement>,
@@ -30,11 +32,14 @@ const MovieSearch = ({
         placeholder="Search..."
         value={searchValue}
         onChange={(e) => handleSearchInput(e)}
+        disabled={disabled}
       />
       <InputGroupAddon>
         <Search />
       </InputGroupAddon>
-      <InputGroupAddon align="inline-end">{movieResults}</InputGroupAddon>
+      {!disabled && (
+        <InputGroupAddon align="inline-end">{movieResults}</InputGroupAddon>
+      )}
     </InputGroup>
   );
 };

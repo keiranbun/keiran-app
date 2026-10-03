@@ -5,7 +5,7 @@ const Apps = () => {
     <h1 className="flex justify-center text-lg">
       <AppCard
         title="The Disc Archive"
-        description="My personal movie collection, Boycotting streaming, one disc at a time."
+        description="A collection of my personal movies."
         link="/movies"
         newCard
       />

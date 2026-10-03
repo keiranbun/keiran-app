@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigation } from "react-router";
 import MoviePagination from "./MoviePagination";
 import { Spinner } from "@/components/ui/spinner";
 import MovieTable from "./MovieTable";
-import { fetchMovieList, fetchMovieListSearch } from "@/lib/movie";
+import {
+  fetchMovieCount,
+  fetchMovieList,
+  fetchMovieListSearch,
+} from "@/lib/movie";
 import MovieSearch from "./MovieSearch";
 
 export type MovieType = {
@@ -21,22 +24,15 @@ enum buttonType {
 }
 
 const Movies = () => {
-  const { movies, movieCount } = useLoaderData() as {
-    movies: MovieType[];
-    movieCount: number;
-  };
-
-  const [displayedMovies, setDisplayedMovies] = useState<MovieType[]>(movies);
-  const [totalMovieCount, setTotalMovieCount] = useState(movieCount);
+  const [displayedMovies, setDisplayedMovies] = useState<MovieType[]>([]);
+  const [totalMovieCount, setTotalMovieCount] = useState(0);
   const [searchValue, setSearchValue] = useState("");
-  const [isMovieFetchLoading, setIsMovieFetchLoading] = useState(false);
-
-  const navigation = useNavigation();
-  const isMovieListLoading =
-    navigation.state === "loading" || isMovieFetchLoading;
-
+  const [isMovieFetchLoading, setIsMovieFetchLoading] = useState(true);
+  const [initialPageLoad, setInitialPageLoad] = useState(true);
   const [moviePerPage, setMoviePerPage] = useState(25);
   const [pageNumber, setPageNumber] = useState(0);
+
+  const isMovieListLoading = isMovieFetchLoading;
 
   const handleButtonDisabledState = (button: buttonType) => {
     let buttonState = false;
@@ -46,19 +42,13 @@ const Movies = () => {
     }
 
     if (button === buttonType.next) {
-      buttonState = (pageNumber + 1) * moviePerPage >= movieCount;
+      buttonState = (pageNumber + 1) * moviePerPage >= totalMovieCount;
     }
 
     return buttonState;
   };
 
-  const handleHidePagination = () => {
-    const searchValueLength = searchValue.length > 0;
-
-    return searchValueLength
-      ? totalMovieCount < moviePerPage
-      : movieCount < moviePerPage;
-  };
+  const handleHidePagination = () => totalMovieCount < moviePerPage;
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -74,9 +64,14 @@ const Movies = () => {
         setDisplayedMovies(fetchedMovies.movies);
         setTotalMovieCount(fetchedMovies.count);
       } else {
-        const fetchedMovies = await fetchMovieList(moviePerPage, pageNumber);
+        const [fetchedMovies, count] = await Promise.all([
+          fetchMovieList(moviePerPage, pageNumber),
+          fetchMovieCount(),
+        ]);
+
         setDisplayedMovies(fetchedMovies.movies);
-        setTotalMovieCount(movieCount);
+        setTotalMovieCount(count);
+        setInitialPageLoad(false);
       }
       setIsMovieFetchLoading(false);
     };
@@ -89,7 +84,8 @@ const Movies = () => {
     }
 
     void fetchAPI();
-  }, [pageNumber, moviePerPage, searchValue, movieCount]);
+  }, [pageNumber, moviePerPage, searchValue]);
+
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-4xl underline underline-offset-5">Movie List</h1>
@@ -98,6 +94,7 @@ const Movies = () => {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         movieResults={totalMovieCount}
+        disabled={initialPageLoad}
       />
 
       {isMovieListLoading ? (

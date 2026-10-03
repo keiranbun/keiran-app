@@ -1,8 +1,5 @@
 import type { MovieType } from "@/pages/Movies/Movies";
 
-export const DEFAULT_MOVIE_LIMIT = 25;
-export const DEFAULT_MOVIE_OFFSET = 0;
-
 const FETCH_LIST_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:3000/api/movies"
@@ -17,15 +14,6 @@ const FETCH_SEARCH_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:3000/api/movies/search"
     : "api/movies/search";
-
-export async function moviePageLoader() {
-  const [movies, movieCount] = await Promise.all([
-    fetchMovieList(DEFAULT_MOVIE_LIMIT, DEFAULT_MOVIE_OFFSET),
-    fetchMovieCount(),
-  ]);
-
-  return { movies, movieCount };
-}
 
 /**
  * Fetches a list of movies from the database
@@ -54,7 +42,7 @@ export async function fetchMovieList(
 /**
  * Fetches the total movie count from the database
  */
-async function fetchMovieCount(): Promise<number> {
+export async function fetchMovieCount(): Promise<number> {
   const response = await fetch(FETCH_COUNT_URL, { method: "GET" });
   const data = await response.json();
 
