@@ -64,8 +64,6 @@ export async function fetchMovieListSearch(
     method: "GET",
   });
 
-  console.log(response);
-
   const data = await response.json();
   const movies = data.body.rows.map((row: string[]) =>
     Object.fromEntries(
