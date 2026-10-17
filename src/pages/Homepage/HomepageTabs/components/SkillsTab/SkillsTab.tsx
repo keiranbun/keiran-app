@@ -2,7 +2,7 @@ import SkillsBadge from "./SkillsBadge";
 
 const SkillsTab = () => {
   return (
-    <div className="mb-5">
+    <div className="mb-5 ml-2">
       <h1 className="underline text-lg mb-2">Languages</h1>
       <div className="flex gap-2">
         <SkillsBadge

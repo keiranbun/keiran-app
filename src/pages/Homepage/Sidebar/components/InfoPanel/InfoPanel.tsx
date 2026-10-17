@@ -25,11 +25,19 @@ const InfoPanel = ({ isMobile }: InfoPanelType) => {
       )}
     >
       <ul className="text-sm">
-        <InfoList text={String(age)} icon={CalendarDays} />
-        <InfoList text="Keiran Bunyan" icon={CircleUser} />
-        <InfoList text="Brisbane, QLD" icon={MapPin} />
-        <InfoList text="Software Developer" icon={Briefcase} />
-        <InfoList text="bunyan.keiran@gmail.com" icon={Mail} />
+        <InfoList text={String(age)} icon={CalendarDays} isMobile={isMobile} />
+        <InfoList text="Keiran Bunyan" icon={CircleUser} isMobile={isMobile} />
+        <InfoList text="Brisbane, QLD" icon={MapPin} isMobile={isMobile} />
+        <InfoList
+          text="Software Developer"
+          icon={Briefcase}
+          isMobile={isMobile}
+        />
+        <InfoList
+          text="bunyan.keiran@gmail.com"
+          icon={Mail}
+          isMobile={isMobile}
+        />
       </ul>
     </div>
   );

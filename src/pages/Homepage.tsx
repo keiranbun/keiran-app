@@ -21,7 +21,7 @@ const Homepage = () => {
     <div
       className={clsx(
         isMobile
-          ? "flex flex-col justify-center items-center"
+          ? "flex flex-col items-center"
           : "flex flex-row justify-center gap-20",
       )}
     >
@@ -30,7 +30,7 @@ const Homepage = () => {
       </div>
       <div>
         <div className="mt-5">
-          <HomepageTabs />
+          <HomepageTabs isMobile={isMobile} />
         </div>
       </div>
     </div>
