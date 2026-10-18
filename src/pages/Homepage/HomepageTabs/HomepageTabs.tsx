@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SkillsTab from "./components/SkillsTab/SkillsTab";
 import EmploymentTab from "./components/EmploymentTab/EmploymentTab";
 import clsx from "clsx";
+import CertificatesTab from "./components/CertificatesTab/CertificatesTab";
 
 type HomepageTabsType = {
   isMobile: boolean;
@@ -30,7 +31,6 @@ const HomepageTabs = ({ isMobile }: HomepageTabsType) => {
           <TabsTrigger
             value="certificates"
             className={clsx(isMobile ? "text-sm" : "text-base")}
-            disabled
           >
             Certificates
           </TabsTrigger>
@@ -41,7 +41,9 @@ const HomepageTabs = ({ isMobile }: HomepageTabsType) => {
         <TabsContent value="employment">
           <EmploymentTab isMobile={isMobile} />
         </TabsContent>
-        <TabsContent value="certificates">WIP</TabsContent>
+        <TabsContent value="certificates">
+          <CertificatesTab isMobile={isMobile} />
+        </TabsContent>
       </Tabs>
     </div>
   );

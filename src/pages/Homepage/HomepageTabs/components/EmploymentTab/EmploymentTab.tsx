@@ -1,10 +1,10 @@
 import EmploymentCard from "./EmploymentCard";
 
-type EmploymentCardType = {
+type EmploymentTabType = {
   isMobile: boolean;
 };
 
-const EmploymentTab = ({ isMobile }: EmploymentCardType) => {
+const EmploymentTab = ({ isMobile }: EmploymentTabType) => {
   return (
     <div className="flex flex-col gap-5 my-5">
       <EmploymentCard
