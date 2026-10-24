@@ -13,6 +13,7 @@ type CertificateCardType = {
   issued: string;
   isMobile: boolean;
   file?: string;
+  expired?: string;
 };
 
 const CertificateCard = ({
@@ -20,6 +21,7 @@ const CertificateCard = ({
   company,
   issued,
   isMobile,
+  expired,
   file = "",
 }: CertificateCardType) => {
   return (
@@ -35,7 +37,15 @@ const CertificateCard = ({
             </div>
           </CardTitle>
           <CardDescription>{company}</CardDescription>
-          <CardDescription>{issued}</CardDescription>
+          {expired ? (
+            <div className="flex flex-row">
+              <CardDescription>
+                {issued} ➜ {expired}
+              </CardDescription>
+            </div>
+          ) : (
+            <CardDescription>{issued}</CardDescription>
+          )}
         </CardHeader>
       </Card>
     </div>
