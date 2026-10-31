@@ -28,7 +28,7 @@ const AppCard = ({ title, description, link, newCard }: AppCardType) => {
         <Card
           size="sm"
           className={
-            "flex-col flex w-full mx-auto max-w-xs hover:border-primary hover:border"
+            "flex-col flex w-full mx-auto max-w-xs min-h-22 hover:border-primary hover:border"
           }
         >
           <CardHeader>

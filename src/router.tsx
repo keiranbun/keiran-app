@@ -5,6 +5,7 @@ import AppLayout from "./layouts/AppLayout";
 import Projects from "./pages/Projects";
 import Apps from "./pages/Apps";
 import Movies from "./pages/Movies/Movies";
+import GameLog from "./pages/GameLog";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
         path: "movies",
         Component: Movies,
       },
+      { path: "/games", Component: GameLog },
     ],
   },
 ]);
