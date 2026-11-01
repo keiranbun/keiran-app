@@ -8,7 +8,7 @@ import {
 } from "../ui/carousel";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import type { GameType } from "@/pages/GameLog";
+import type { GameType } from "@/pages/Apps/GameLog";
 
 type GameCardType = {
   gameList: GameType[];
