@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import MoviePagination from "./MoviePagination";
 import { Spinner } from "@/components/ui/spinner";
-import MovieTable from "./MovieTable";
 import {
   fetchMovieCount,
   fetchMovieList,
   fetchMovieListSearch,
 } from "@/lib/movie";
-import MovieSearch from "./MovieSearch";
+import MovieSearch from "@/components/Movies/MovieSearch";
+import MoviePagination from "@/components/Movies/MoviePagination";
+import MovieTable from "@/components/Movies/MovieTable";
 
 export type MovieType = {
   movie_id: number;

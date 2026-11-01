@@ -1,4 +1,4 @@
-import type { MovieType } from "./Movies";
+import type { MovieType } from "@/pages/Movies";
 
 type MovieTableType = {
   movies: MovieType[];

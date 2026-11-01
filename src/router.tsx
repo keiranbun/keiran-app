@@ -4,8 +4,8 @@ import Error from "./pages/Error";
 import AppLayout from "./layouts/AppLayout";
 import Projects from "./pages/Projects";
 import Apps from "./pages/Apps";
-import Movies from "./pages/Movies/Movies";
 import GameLog from "./pages/GameLog";
+import Movies from "./pages/Movies";
 
 export const router = createBrowserRouter([
   {

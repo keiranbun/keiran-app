@@ -1,4 +1,4 @@
-import type { MovieType } from "@/pages/Movies/Movies";
+import type { MovieType } from "@/components/Movies/Movies";
 
 const FETCH_LIST_URL =
   window.location.hostname === "localhost"

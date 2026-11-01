@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import HomepageTabs from "./Homepage/HomepageTabs/HomepageTabs";
-import Sidebar from "./Homepage/Sidebar/Sidebar";
+import HomepageTabs from "../components/Homepage/HomepageTabs/HomepageTabs";
+import Sidebar from "../components/Homepage/Sidebar/Sidebar";
 import clsx from "clsx";
 
 const Homepage = () => {
