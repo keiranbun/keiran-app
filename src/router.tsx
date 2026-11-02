@@ -6,6 +6,7 @@ import Projects from "./pages/Projects";
 import Apps from "./pages/Apps";
 import GameLog from "./pages/Apps/GameLog";
 import Movies from "./pages/Apps/Movies";
+import Timer from "./pages/Apps/Timer";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
         Component: Movies,
       },
       { path: "/games", Component: GameLog },
+      { path: "/timer", Component: Timer },
     ],
   },
 ]);
